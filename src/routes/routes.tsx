@@ -1,6 +1,8 @@
 
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
+import BookDetails from '../pages/BookDetails';
+import Books from '../pages/Books';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
@@ -15,6 +17,14 @@ const routes = createBrowserRouter([
         index: true,
         element: <Home />,
       },
+      {
+        path: '/books',
+        element: <Books />,
+      },
+      {
+        path: '/book-details/:id',
+        element: <BookDetails />,
+      }
     ],
   },
   {
