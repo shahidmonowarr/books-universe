@@ -5,14 +5,6 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5000",
   }),
-  endpoints: (builder) => ({
-    getBooks: builder.query({
-      query: () => "/books",
-    }),
-    singleBook: builder.query({
-      query: (id) => `/book/${id}`,
-    }),
-  }),
+  tagTypes: ["comments"],
+  endpoints: () => ({}),
 });
-
-export const { useGetBooksQuery, useSingleBookQuery } = api;

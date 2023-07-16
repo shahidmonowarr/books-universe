@@ -4,7 +4,7 @@ import { FiSearch } from "react-icons/fi";
 import BookCard from "../components/BookCard";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
-import { useGetBooksQuery } from "../redux/api/apiSlice";
+import { useGetBooksQuery } from "../redux/features/books/bookApi";
 import {
   setGenre,
   setPublicationDate,

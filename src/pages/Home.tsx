@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import BookCard from "../components/BookCard";
 import { Button } from "../components/ui/button";
 import Footer from "../layout/Footer";
-import { useGetBooksQuery } from "../redux/api/apiSlice";
+import { useGetBooksQuery } from "../redux/features/books/bookApi";
 import { IBook } from "../types/globalTypes";
 
 export default function Home() {
