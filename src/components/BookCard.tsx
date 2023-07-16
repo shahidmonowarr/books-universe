@@ -17,7 +17,12 @@ export default function bookCard({ book }: IProps) {
         <p className="text-sm">Author: {book?.author}</p>
         <p className="text-sm">Genre: {book?.genre}</p>
         <p className="text-sm">Publication Date: {book?.publicationDate}</p>
-        <Button variant="default">Add to wishlist</Button>
+        <div>
+          <Button variant="default" className="mb-1">
+            Add to wishlist
+          </Button>
+          <Button variant="default">Add to reading list</Button>
+        </div>
       </div>
     </div>
   );
