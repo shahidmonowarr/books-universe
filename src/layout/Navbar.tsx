@@ -1,3 +1,4 @@
+import { signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/books-logo.png";
 import Cart from "../components/Cart";
@@ -11,8 +12,21 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../components/ui/dropdown-menu";
+import { auth } from "../lib/firebase";
+import { setUser } from "../redux/features/user/userSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hook";
 
 export default function Navbar() {
+  const { user } = useAppSelector((state) => state.user);
+
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    console.log("logout");
+    signOut(auth).then(() => {
+      dispatch(setUser(null));
+    });
+  };
 
   return (
     <nav className="fixed z-10 w-full h-16 top backdrop-blur-lg">
@@ -55,6 +69,28 @@ export default function Navbar() {
                     <DropdownMenuItem className="cursor-pointer">
                       Profile
                     </DropdownMenuItem>
+                    {!user.email && (
+                      <>
+                        <Link to="/login">
+                          <DropdownMenuItem className="cursor-pointer">
+                            Login
+                          </DropdownMenuItem>
+                        </Link>
+                        <Link to="/signup">
+                          <DropdownMenuItem className="cursor-pointer">
+                            Sign Up
+                          </DropdownMenuItem>
+                        </Link>
+                      </>
+                    )}
+                    {user.email && (
+                      <DropdownMenuItem
+                        onClick={handleLogout}
+                        className="cursor-pointer"
+                      >
+                        Logout
+                      </DropdownMenuItem>
+                    )}
                   </DropdownMenuContent>
                 </DropdownMenu>
               </li>
