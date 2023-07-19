@@ -7,3 +7,9 @@ export interface IBook {
   publicationDate: string;
   image_link: string;
 }
+
+export interface IError {
+  data: {
+    message: string;
+  };
+}
