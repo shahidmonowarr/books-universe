@@ -1,4 +1,3 @@
-import { signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/books-logo.png";
 import Cart from "../components/Cart";
@@ -12,20 +11,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../components/ui/dropdown-menu";
-import { auth } from "../lib/firebase";
-import { setUser } from "../redux/features/user/userSlice";
+import { logoutState } from "../redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 
 export default function Navbar() {
-  const { user } = useAppSelector((state) => state.user);
+  const { token } = useAppSelector((state) => state.auth);
 
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {
     console.log("logout");
-    signOut(auth).then(() => {
-      dispatch(setUser(null));
-    });
+    localStorage.removeItem("token");
+    dispatch(logoutState());
   };
 
   return (
@@ -69,7 +66,7 @@ export default function Navbar() {
                     <DropdownMenuItem className="cursor-pointer">
                       Profile
                     </DropdownMenuItem>
-                    {!user.email && (
+                    {!token && (
                       <>
                         <Link to="/login">
                           <DropdownMenuItem className="cursor-pointer">
@@ -83,7 +80,7 @@ export default function Navbar() {
                         </Link>
                       </>
                     )}
-                    {user.email && (
+                    {token && (
                       <DropdownMenuItem
                         onClick={handleLogout}
                         className="cursor-pointer"

@@ -1,28 +1,28 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { onAuthStateChanged } from "firebase/auth";
-import { useEffect } from "react";
+import jwtDecode from "jwt-decode";
 import { Toaster } from "./components/ui/Toaster";
 import MainLayout from "./layout/MainLayout";
-import { auth } from "./lib/firebase";
-import { setLoading, setUser } from "./redux/features/user/userSlice";
+import { loginState } from "./redux/features/auth/authSlice";
 import { useAppDispatch } from "./redux/hook";
 
 function App() {
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(setLoading(true));
+  const userToken = localStorage.getItem("token");
+  const parsedToken = userToken ? JSON.parse(userToken!) : null;
 
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        dispatch(setUser(user.email!));
-        dispatch(setLoading(false));
-      } else {
-        dispatch(setLoading(false));
-      }
-    });
-  }, [dispatch]);
+  // check token expiration
+  if (parsedToken) {
+    const decodedToken = jwtDecode(parsedToken) as { exp: number };
+    if (decodedToken.exp * 1000 < Date.now() / 1000) {
+      localStorage.removeItem("token");
+    }
+  }
 
+  // set token into state for header request
+  if (userToken) {
+    dispatch(loginState({ accessToken: parsedToken }));
+  }
   return (
     <div>
       <Toaster />
