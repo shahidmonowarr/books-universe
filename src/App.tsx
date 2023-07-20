@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import jwtDecode from "jwt-decode";
-import { Toaster } from "./components/ui/Toaster";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import MainLayout from "./layout/MainLayout";
 import { loginState } from "./redux/features/auth/authSlice";
 import { useAppDispatch } from "./redux/hook";
@@ -25,7 +26,8 @@ function App() {
   }
   return (
     <div>
-      <Toaster />
+      {/* <Toaster /> */}
+      <ToastContainer />
       <MainLayout />
     </div>
   );
