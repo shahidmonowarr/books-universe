@@ -3,22 +3,35 @@ import { api } from "../../api/apiSlice";
 const bookApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getBooks: builder.query({
-      query: () => "/books",
+      query: (query) => `/book?${query}`,
+      providesTags: ["book"],
     }),
     singleBook: builder.query({
       query: (id) => `/book/${id}`,
+      providesTags: ["book"],
     }),
-    postComment: builder.mutation({
+    updateBook: builder.mutation({
       query: ({ id, data }) => ({
-        url: `/comment/${id}`,
-        method: "POST",
+        url: `/book/${id}`,
+        method: "PATCH",
         body: data,
       }),
-      invalidatesTags: ["comments"],
+      invalidatesTags: ["book"],
     }),
-    getComments: builder.query({
-      query: (id) => `/comment/${id}`,
-      providesTags: ["comments"],
+    deleteBook: builder.mutation({
+      query: (id) => ({
+        url: `/book/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["book"],
+    }),
+    reviewBook: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/book/review/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["book"],
     }),
   }),
 });
@@ -26,6 +39,7 @@ const bookApi = api.injectEndpoints({
 export const {
   useGetBooksQuery,
   useSingleBookQuery,
-  usePostCommentMutation,
-  useGetCommentsQuery,
+  useUpdateBookMutation,
+  useDeleteBookMutation,
+  useReviewBookMutation,
 } = bookApi;

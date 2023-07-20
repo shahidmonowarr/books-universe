@@ -8,8 +8,8 @@ import { IBook } from "../types/globalTypes";
 export default function Home() {
   const { data } = useGetBooksQuery(undefined);
 
-  const topBooks: IBook[] = data?.data
-    ? data.data
+  const topBooks: IBook[] = data?.data?.data
+    ? data.data?.data
         .slice()
         .sort(
           (bookA: IBook, bookB: IBook) =>

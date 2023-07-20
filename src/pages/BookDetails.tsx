@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import BookReview from "../components/BookReview";
 import { Button } from "../components/ui/button";
 import { useSingleBookQuery } from "../redux/features/books/bookApi";
 
@@ -24,7 +23,7 @@ export default function BookDetails() {
           </div>
         </div>
       </div>
-      <BookReview id={id!} />
+      {/* <BookReview id={id!} /> */}
     </>
   );
 }

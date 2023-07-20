@@ -20,7 +20,7 @@ export default function Books() {
   const { genre, publicationDate } = useAppSelector((state) => state.book);
   const genres: string[] = [
     ...new Set(
-      data?.data
+      data?.data?.data
         ?.map((book: IBook) => book.genre)
         .filter(
           (genre: null | undefined) => genre !== null && genre !== undefined
@@ -98,7 +98,7 @@ export default function Books() {
               onChange={handlePublicationDateChange}
             >
               <option value="">All</option>
-              {data?.data
+              {data?.data?.data
                 ?.filter((book: IBook) => book.genre === genre)
                 .map((book: IBook, index: number) => (
                   <option key={index} value={book.publicationDate}>
@@ -111,7 +111,7 @@ export default function Books() {
       </div>
       <div className="grid grid-cols-12 max-w-7xl mx-auto relative">
         <div className="col-span-12 grid grid-cols-4 gap-10 pb-20">
-          {data?.data
+          {data?.data?.data
             ?.filter((book: IBook) => {
               if (genre && !book.genre?.includes(genre)) {
                 return false;
