@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import BookReview from "../components/BookReview";
 import DeleteConfirmationModal from "../components/DeleteConfirmationModel";
 import Loading from "../components/Loading";
 import { Button } from "../components/ui/button";
@@ -9,7 +10,6 @@ import {
   useSingleBookQuery,
   useUpdateBookMutation,
 } from "../redux/features/books/bookApi";
-import { useAppSelector } from "../redux/hook";
 import { IError } from "../types/globalTypes";
 
 export default function BookDetails() {
@@ -18,7 +18,6 @@ export default function BookDetails() {
   const { data, isLoading } = useSingleBookQuery(id);
   const book = data?.data;
   const navigate = useNavigate();
-  const { token } = useAppSelector((state) => state.auth);
 
   const [
     updateBook,
@@ -126,7 +125,7 @@ export default function BookDetails() {
           </div>
         </div>
       </div>
-      {/* <BookReview id={id!} /> */}
+      <BookReview id={id!} />
       <DeleteConfirmationModal
         show={showDeleteModal}
         onClose={handleDeleteCancel}
