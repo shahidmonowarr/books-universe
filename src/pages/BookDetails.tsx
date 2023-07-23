@@ -112,12 +112,9 @@ export default function BookDetails() {
             <Button className="me-2" onClick={() => handleUpdate(id)}>
               Edit
             </Button>
-            {/* <Button className="me-2" onClick={() => handleDelete(id)}>
-              Delete
-            </Button> */}
             <label
               htmlFor="deleteModal"
-              className="second_button duration-300 rounded-full py-[8px] px-[12px] font-medium cursor-pointer text-white bg-red-500 hover:bg-red-600"
+              className="duration-300 h-10 py-2.5 px-4 rounded-md text-sm font-medium cursor-pointer text-white bg-red-500 hover:bg-red-600"
               onClick={handleDeleteConfirmation}
             >
               Delete

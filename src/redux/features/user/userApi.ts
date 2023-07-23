@@ -7,7 +7,7 @@ const userApi = api.injectEndpoints({
       providesTags: ["wishlist", "readlist"],
     }),
     addWishList: builder.mutation({
-      query: (data) => ({
+      query: ({ data }) => ({
         url: `/user/add-wishlist`,
         method: "PATCH",
         body: data,
@@ -15,7 +15,7 @@ const userApi = api.injectEndpoints({
       invalidatesTags: ["wishlist"],
     }),
     removeWishList: builder.mutation({
-      query: (data) => ({
+      query: ({ data }) => ({
         url: `/user/remove-wishlist`,
         method: "PATCH",
         body: data,
@@ -23,7 +23,7 @@ const userApi = api.injectEndpoints({
       invalidatesTags: ["wishlist"],
     }),
     addReadList: builder.mutation({
-      query: (data) => ({
+      query: ({ data }) => ({
         url: `/user/add-readlist`,
         method: "PATCH",
         body: data,
@@ -31,7 +31,7 @@ const userApi = api.injectEndpoints({
       invalidatesTags: ["readlist"],
     }),
     markCompleted: builder.mutation({
-      query: (data) => ({
+      query: ({ data }) => ({
         url: `/user/mark-finished`,
         method: "PATCH",
         body: data,

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/images/books-logo.png";
-import Cart from "../components/Cart";
+import ReadList from "../components/ReadList";
+import WishList from "../components/WishList";
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
 import { Button } from "../components/ui/button";
 import {
@@ -50,7 +51,10 @@ export default function Navbar() {
                 </Button>
               </li>
               <li>
-                <Cart />
+                <ReadList />
+              </li>
+              <li>
+                <WishList />
               </li>
               <li className="ml-5">
                 <DropdownMenu>

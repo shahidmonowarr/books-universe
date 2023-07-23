@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import BookCard from "../components/BookCard";
+import Loading from "../components/Loading";
 import { Button } from "../components/ui/button";
 import Footer from "../layout/Footer";
 import { useGetBooksQuery } from "../redux/features/books/bookApi";
 import { IBook } from "../types/globalTypes";
 
 export default function Home() {
-  const { data } = useGetBooksQuery(undefined);
+  const { data, isLoading } = useGetBooksQuery(undefined);
 
   const topBooks: IBook[] = data?.data?.data
     ? data.data?.data
@@ -18,6 +19,10 @@ export default function Home() {
         )
         .slice(0, 10)
     : [];
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <>
