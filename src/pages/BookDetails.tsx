@@ -100,7 +100,7 @@ export default function BookDetails() {
   return (
     <>
       <div className="flex max-w-3xl mx-auto items-center border-b border-gray-300">
-        <div className="w-[100%]">
+        <div className="w-[100%] me-3 my-2">
           <img src={book?.image_link} alt="" />
         </div>
         <div className="w-[100%] space-y-3">

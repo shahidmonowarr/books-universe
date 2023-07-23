@@ -28,10 +28,8 @@ interface IReview {
 
 export default function BookReview({ id }: IProps) {
   const { data, isLoading } = useSingleBookQuery(id);
-  console.log(data);
 
   const reviews = data?.data?.reviews;
-  console.log(reviews);
 
   const { token } = useAppSelector((state) => state.auth);
 
