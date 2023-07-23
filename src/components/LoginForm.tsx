@@ -14,11 +14,6 @@ import Loading from "./Loading";
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
-interface LoginFormInputs {
-  email: string;
-  password: string;
-}
-
 export function LoginForm({ className, ...props }: UserAuthFormProps) {
   const [login, { isSuccess, data, isError, error, isLoading, reset }] =
     useLoginMutation();
