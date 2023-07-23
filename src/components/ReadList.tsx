@@ -33,6 +33,9 @@ export default function ReadList() {
   const { data, isLoading } = useGetUserQuery(undefined);
   const readLists = data?.data?.readlist;
 
+  // Calculate the count of items in the readlist
+  const readListCount = readLists?.length || 0;
+
   const [markCompleted, { isSuccess, isError, error, reset }] =
     useMarkCompletedMutation();
 
@@ -54,6 +57,9 @@ export default function ReadList() {
       <SheetTrigger>
         <Button variant="ghost">
           <HiBookOpen size="30" />
+          {readListCount > 0 && (
+            <span className="ml-1 text-sm">{readListCount}</span>
+          )}
         </Button>
       </SheetTrigger>
       <SheetContent className="relative overflow-auto">

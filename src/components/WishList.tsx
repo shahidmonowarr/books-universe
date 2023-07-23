@@ -29,6 +29,9 @@ export default function WishList() {
   const { data, isLoading } = useGetUserQuery(undefined);
   const wishLists = data?.data?.wishlist;
 
+  // Calculate the count of items in the wishlist
+  const wishListCount = wishLists?.length || 0;
+
   const [removeWishlist, { isSuccess, isError, error, reset }] =
     useRemoveWishListMutation();
 
@@ -50,6 +53,9 @@ export default function WishList() {
       <SheetTrigger>
         <Button variant="ghost">
           <HiHeart size="30" />
+          {wishListCount > 0 && (
+            <span className="ml-1 text-sm">{wishListCount}</span>
+          )}
         </Button>
       </SheetTrigger>
       <SheetContent className="relative overflow-auto">
