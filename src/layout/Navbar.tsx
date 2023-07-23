@@ -35,33 +35,57 @@ export default function Navbar() {
           </div>
           <div>
             <ul className="flex items-center">
-              <li>
-                <Button variant="link" asChild>
-                  <Link to="/">Home</Link>
-                </Button>
-              </li>
-              <li>
-                <Button variant="link" asChild>
-                  <Link to="/books">All Books</Link>
-                </Button>
-              </li>
-              <li>
-                <Button variant="link" asChild>
-                  <Link to="/add-new-book">Add New</Link>
-                </Button>
-              </li>
-              <li>
-                <ReadList />
-              </li>
-              <li>
-                <WishList />
-              </li>
+              {!token && (
+                <>
+                  <li>
+                    <Button variant="link" asChild>
+                      <Link to="/">Home</Link>
+                    </Button>
+                  </li>
+                  <li>
+                    <Button variant="link" asChild>
+                      <Link to="/books">All Books</Link>
+                    </Button>
+                  </li>
+                  <li>
+                    <Button variant="link" asChild>
+                      <Link to="/contact">Contact</Link>
+                    </Button>
+                  </li>
+                </>
+              )}
+              {token && (
+                <>
+                  <li>
+                    <Button variant="link" asChild>
+                      <Link to="/">Home</Link>
+                    </Button>
+                  </li>
+                  <li>
+                    <Button variant="link" asChild>
+                      <Link to="/books">All Books</Link>
+                    </Button>
+                  </li>
+                  <li>
+                    <Button variant="link" asChild>
+                      <Link to="/add-new-book">Add New</Link>
+                    </Button>
+                  </li>
+                  <li>
+                    <ReadList />
+                  </li>
+                  <li>
+                    <WishList />
+                  </li>
+                </>
+              )}
+
               <li className="ml-5">
                 <DropdownMenu>
                   <DropdownMenuTrigger className="outline-none">
                     <Avatar>
-                      <AvatarImage src="https://github.com/shadcn.png" />
-                      <AvatarFallback>CN</AvatarFallback>
+                      <AvatarImage src="https://user-images.githubusercontent.com/522079/90506845-e8420580-e122-11ea-82ca-31087fc8486c.png" />
+                      <AvatarFallback>SM</AvatarFallback>
                     </Avatar>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>

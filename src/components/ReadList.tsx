@@ -32,7 +32,6 @@ interface IReadList {
 export default function ReadList() {
   const { data, isLoading } = useGetUserQuery(undefined);
   const readLists = data?.data?.readlist;
-  console.log(readLists);
 
   const [markCompleted, { isSuccess, isError, error, reset }] =
     useMarkCompletedMutation();

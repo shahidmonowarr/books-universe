@@ -35,8 +35,6 @@ export default function BookCard({ book }: IProps) {
     },
   ] = useAddReadListMutation();
 
-  // console.log(addReadingList);
-
   useEffect(() => {
     if (isWishListSuccess) {
       toast.success(wishListData?.message);
