@@ -6,7 +6,6 @@ import {
   useMarkCompletedMutation,
 } from "../redux/features/user/userApi";
 import { IError } from "../types/globalTypes";
-import Loading from "./Loading";
 import { Button } from "./ui/button";
 import {
   Sheet,
@@ -30,7 +29,7 @@ interface IReadList {
 }
 
 export default function ReadList() {
-  const { data, isLoading } = useGetUserQuery(undefined);
+  const { data } = useGetUserQuery(undefined);
   const readLists = data?.data?.readlist;
 
   // Calculate the count of items in the readlist
@@ -47,10 +46,6 @@ export default function ReadList() {
       reset();
     }
   }, [isSuccess, isError, error, reset]);
-
-  if (isLoading) {
-    return <Loading />;
-  }
 
   return (
     <Sheet>

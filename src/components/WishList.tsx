@@ -6,7 +6,6 @@ import {
   useRemoveWishListMutation,
 } from "../redux/features/user/userApi";
 import { IError } from "../types/globalTypes";
-import Loading from "./Loading";
 import { Button } from "./ui/button";
 import {
   Sheet,
@@ -26,7 +25,7 @@ interface IWishList {
 }
 
 export default function WishList() {
-  const { data, isLoading } = useGetUserQuery(undefined);
+  const { data } = useGetUserQuery(undefined);
   const wishLists = data?.data?.wishlist;
 
   // Calculate the count of items in the wishlist
@@ -43,10 +42,6 @@ export default function WishList() {
       reset();
     }
   }, [isSuccess, isError, error, reset]);
-
-  if (isLoading) {
-    return <Loading />;
-  }
 
   return (
     <Sheet>
@@ -76,8 +71,6 @@ export default function WishList() {
                   {wishList?.title}
                 </h1>
                 <>Author: {wishList.author?.slice(0, 10)}</>
-                <p>Genre: {wishList.genre}</p>
-                <p>{wishList.publicationDate}</p>
               </div>
               <div className="border-l pl-5 flex flex-col justify-between">
                 <Button

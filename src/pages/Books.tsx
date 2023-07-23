@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useEffect, useState } from "react";
-import { FiSearch } from "react-icons/fi";
 import BookCard from "../components/BookCard";
-import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { useGetBooksQuery } from "../redux/features/books/bookApi";
 import {
@@ -63,12 +61,6 @@ export default function Books() {
             value={searchInput}
             onChange={handleSearchChange}
           />
-          <Button
-            type="submit"
-            className="rounded-full h-10 w-10 p-2 text-[25px]"
-          >
-            <FiSearch />
-          </Button>
         </form>
       </div>
       <div className="max-w-2xl mx-auto mt-5 mb-5">

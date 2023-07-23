@@ -36,7 +36,7 @@ export default function Home() {
           </Button>
         </div>
       </div>
-      <div className="  mx-10">
+      <div className="max-w-7xl mx-auto relative">
         <h2 className="text-2xl text-center font-semibold mt-10 mb-5">
           Top 10 Recently Added Books:
         </h2>

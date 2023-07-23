@@ -98,7 +98,7 @@ export default function Navbar() {
                       <>
                         <Link to="/login">
                           <DropdownMenuItem className="cursor-pointer">
-                            Login
+                            Sign In
                           </DropdownMenuItem>
                         </Link>
                         <Link to="/signup">

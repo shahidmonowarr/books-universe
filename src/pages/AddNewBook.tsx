@@ -13,6 +13,7 @@ export default function AddNewBook() {
     author: Yup.string().required("Author name is required"),
     genre: Yup.string().required("Genre is required"),
     publicationDate: Yup.string().required("Publication date is required"),
+    image_link: Yup.string().required("Image link is required"),
   });
 
   const formik = useFormik({
