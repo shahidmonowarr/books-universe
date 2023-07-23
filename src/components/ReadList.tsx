@@ -40,6 +40,7 @@ export default function ReadList() {
 
   useEffect(() => {
     if (isSuccess) {
+      toast.success("Book marked as Finished");
       reset();
     } else if (isError) {
       toast.error((error as IError).data.message);

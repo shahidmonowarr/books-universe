@@ -36,6 +36,7 @@ export default function WishList() {
 
   useEffect(() => {
     if (isSuccess) {
+      toast.success("Book removed from wishlist");
       reset();
     } else if (isError) {
       toast.error((error as IError).data.message);
