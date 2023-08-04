@@ -41,7 +41,7 @@ export default function Home() {
         <h2 className="text-2xl text-center font-semibold mt-10 mb-5">
           Top 10 Recently Added Books:
         </h2>
-        <div className="grid grid-cols-4 gap-10 mb-5">
+        <div className="grid grid-flow-row sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {topBooks.map((book: IBook) => (
             <BookCard key={book._id} book={book} />
           ))}

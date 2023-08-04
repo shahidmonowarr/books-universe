@@ -53,7 +53,7 @@ export default function Books() {
 
   return (
     <div className="max-w-7xl mx-auto relative">
-      <div className="max-w-2xl mx-auto mt-5 mb-5">
+      <div className="max-w-md mx-auto mt-5 mb-5 px-10">
         <form className="flex gap-5 items-center" onSubmit={handleSearchSubmit}>
           <Input
             className="min-h-[30px]"
@@ -63,7 +63,7 @@ export default function Books() {
           />
         </form>
       </div>
-      <div className="max-w-2xl mx-auto mt-5 mb-5">
+      <div className="max-w-md mx-auto mt-5 mb-5 px-12">
         <div className="flex gap-5 items-center">
           <label htmlFor="genre">Genre:</label>
           <select
@@ -102,7 +102,7 @@ export default function Books() {
         )}
       </div>
       <div className="grid grid-cols-12 max-w-7xl mx-auto relative">
-        <div className="col-span-12 grid grid-cols-4 gap-10 pb-20">
+        <div className="col-span-12 grid grid-flow-row sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {data?.data?.data
             ?.filter((book: IBook) => {
               if (genre && !book.genre?.includes(genre)) {
