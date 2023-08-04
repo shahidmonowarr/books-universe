@@ -44,8 +44,8 @@ export default function AddNewBook() {
   }, [isSuccess, isError, error, reset]);
 
   return (
-    <div className="flex items-center h-[calc(100vh-180px)] mt-5 max-w-2xl mx-auto ">
-      <div className="box_shadow bg-slate-300 p-5 rounded-lg">
+    <div className="flex items-center my-10 max-w-2xl mx-auto">
+      <div className="bg-slate-300 p-5 rounded-lg">
         <h1 className="text-center text-zinc-900 text-4xl uppercase font-bold mb-2">
           Add Book
         </h1>
@@ -137,7 +137,7 @@ export default function AddNewBook() {
           </div>
           <button
             type="submit"
-            className="first_button duration-300 rounded-lg py-[10px] px-[10px] font-medium bg-blue-500 hover:bg-blue-600 text-white"
+            className="duration-300 rounded-lg py-[10px] px-[10px] font-medium bg-blue-500 hover:bg-blue-600 text-white"
           >
             Add book
           </button>

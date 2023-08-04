@@ -98,12 +98,16 @@ export default function BookDetails() {
   }
 
   return (
-    <>
-      <div className="flex max-w-3xl mx-auto items-center border-b border-gray-300">
-        <div className="w-[100%] me-3 my-2">
-          <img src={book?.image_link} alt="" />
+    <div className="container px-5 mx-auto py-10">
+      <div className="flex flex-wrap max-w-xl mx-auto  items-center border-b border-gray-300">
+        <div className=" me-3 my-2">
+          <img
+            className="object-cover w-full object-center rounded"
+            src={book?.image_link}
+            alt=""
+          />
         </div>
-        <div className="w-[100%] space-y-3">
+        <div className="w-full space-y-3 mb-5">
           <h1 className="text-4xl font-bold">{book?.title}</h1>
           <p className="text-xl">Author: {book?.author}</p>
           <p className="text-xl">Genre: {book?.genre}</p>
@@ -128,6 +132,6 @@ export default function BookDetails() {
         onClose={handleDeleteCancel}
         onConfirm={handleDeleteConfirm}
       />
-    </>
+    </div>
   );
 }

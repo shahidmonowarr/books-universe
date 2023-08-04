@@ -80,7 +80,7 @@ export default function BookReview({ id }: IProps) {
     return <Loading />;
   }
   return (
-    <div className="max-w-3xl mx-auto mt-5">
+    <div className="max-w-xl mx-auto mt-5">
       <form className="flex gap-5 items-center" onSubmit={formik.handleSubmit}>
         <Textarea
           className="min-h-[30px]"
