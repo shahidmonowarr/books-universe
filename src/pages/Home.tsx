@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import BookCard from "../components/BookCard";
+import Hero from "../components/Hero";
 import Loading from "../components/Loading";
-import { Button } from "../components/ui/button";
+import NewsLetter from "../components/NewsLetter";
 import Footer from "../layout/Footer";
 import { useGetBooksQuery } from "../redux/features/books/bookApi";
 import { IBook } from "../types/globalTypes";
@@ -25,8 +25,9 @@ export default function Home() {
   }
 
   return (
-    <>
-      <div className="flex items-center h-[calc(80vh-180px)] max-w-3xl mx-auto ">
+    <div>
+      <Hero />
+      {/* <div className="flex items-center h-[calc(80vh-180px)] max-w-3xl mx-auto ">
         <div className="items-center justify-center text-center">
           <h1 className="mt-10 text-5xl mx-auto font-black uppercase text-primary">
             Welcome to Books Universe
@@ -35,7 +36,7 @@ export default function Home() {
             <Link to="/books">Brows all books</Link>
           </Button>
         </div>
-      </div>
+      </div> */}
       <div className="max-w-7xl mx-auto relative">
         <h2 className="text-2xl text-center font-semibold mt-10 mb-5">
           Top 10 Recently Added Books:
@@ -46,7 +47,8 @@ export default function Home() {
           ))}
         </div>
       </div>
+      <NewsLetter />
       <Footer />
-    </>
+    </div>
   );
 }
