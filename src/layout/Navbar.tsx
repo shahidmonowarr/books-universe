@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { MdClose, MdMenu } from "react-icons/md";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/books-logo.png";
 import ReadList from "../components/ReadList";
@@ -25,6 +27,12 @@ export default function Navbar() {
     dispatch(logoutState());
   };
 
+  const [showMenu, setShowMenu] = useState(false);
+
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
+
   return (
     <nav className="fixed z-10 w-full h-16 top backdrop-blur-lg">
       <div className="w-full h-full bg-white/60">
@@ -32,7 +40,21 @@ export default function Navbar() {
           <div>
             <img className="h-9" src={logo} alt="log" />
           </div>
-          <div>
+          <div className="md:hidden">
+            {showMenu ? (
+              <MdClose
+                className="w-8 h-8 cursor-pointer"
+                onClick={toggleMenu}
+              />
+            ) : (
+              <MdMenu className="w-8 h-8 cursor-pointer" onClick={toggleMenu} />
+            )}
+          </div>
+          <div
+            className={`${
+              showMenu ? "hidden" : "hidden"
+            } md:flex md:items-center`}
+          >
             <ul className="flex items-center">
               {!token && (
                 <>
@@ -122,6 +144,95 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+      {showMenu && (
+        <div className="md:hidden w-full bg-white/60">
+          <ul className="flex flex-col items-center justify-center space-y-4">
+            {!token && (
+              <>
+                <li>
+                  <Button variant="link" asChild>
+                    <Link to="/">Home</Link>
+                  </Button>
+                </li>
+                <li>
+                  <Button variant="link" asChild>
+                    <Link to="/books">All Books</Link>
+                  </Button>
+                </li>
+                <li>
+                  <Button variant="link" asChild>
+                    <Link to="/contact">Contact</Link>
+                  </Button>
+                </li>
+              </>
+            )}
+            {token && (
+              <>
+                <li>
+                  <Button variant="link" asChild>
+                    <Link to="/">Home</Link>
+                  </Button>
+                </li>
+                <li>
+                  <Button variant="link" asChild>
+                    <Link to="/books">All Books</Link>
+                  </Button>
+                </li>
+                <li>
+                  <Button variant="link" asChild>
+                    <Link to="/add-new-book">Add New</Link>
+                  </Button>
+                </li>
+                <li>
+                  <ReadList />
+                </li>
+                <li>
+                  <WishList />
+                </li>
+              </>
+            )}
+            <li>
+              <DropdownMenu>
+                <DropdownMenuTrigger className="outline-none">
+                  <Avatar>
+                    <AvatarImage src="https://user-images.githubusercontent.com/522079/90506845-e8420580-e122-11ea-82ca-31087fc8486c.png" />
+                    <AvatarFallback>SM</AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className="cursor-pointer">
+                    Profile
+                  </DropdownMenuItem>
+                  {!token && (
+                    <>
+                      <Link to="/login">
+                        <DropdownMenuItem className="cursor-pointer">
+                          Sign In
+                        </DropdownMenuItem>
+                      </Link>
+                      <Link to="/signup">
+                        <DropdownMenuItem className="cursor-pointer">
+                          Sign Up
+                        </DropdownMenuItem>
+                      </Link>
+                    </>
+                  )}
+                  {token && (
+                    <DropdownMenuItem
+                      onClick={handleLogout}
+                      className="cursor-pointer"
+                    >
+                      Logout
+                    </DropdownMenuItem>
+                  )}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </li>
+          </ul>
+        </div>
+      )}
     </nav>
   );
 }
