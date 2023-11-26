@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import BookCard from "../components/BookCard";
 import { Input } from "../components/ui/input";
+import Skeletons from "../components/ui/skeleton/Skeletons";
 import { useGetBooksQuery } from "../redux/features/books/bookApi";
 import {
   setGenre,
@@ -12,7 +13,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { IBook } from "../types/globalTypes";
 
 export default function Books() {
-  const { data } = useGetBooksQuery(undefined);
+  const { data, isLoading } = useGetBooksQuery(undefined);
   const [searchInput, setSearchInput] = useState("");
   const dispatch = useAppDispatch();
   const { genre, publicationDate } = useAppSelector((state) => state.book);
@@ -52,9 +53,9 @@ export default function Books() {
   }, [dispatch]);
 
   return (
-    <div className="max-w-7xl mx-auto relative">
-      <div className="max-w-md mx-auto mt-5 mb-5 px-10">
-        <form className="flex gap-5 items-center" onSubmit={handleSearchSubmit}>
+    <div className="relative mx-auto max-w-7xl">
+      <div className="max-w-md px-10 mx-auto mt-5 mb-5">
+        <form className="flex items-center gap-5" onSubmit={handleSearchSubmit}>
           <Input
             className="min-h-[30px]"
             placeholder="Search for books"
@@ -63,8 +64,8 @@ export default function Books() {
           />
         </form>
       </div>
-      <div className="max-w-md mx-auto mt-5 mb-5 px-12">
-        <div className="flex gap-5 items-center">
+      <div className="max-w-md px-12 mx-auto mt-5 mb-5">
+        <div className="flex items-center gap-5">
           <label htmlFor="genre">Genre:</label>
           <select
             id="genre"
@@ -81,7 +82,7 @@ export default function Books() {
           </select>
         </div>
         {genre && (
-          <div className="flex gap-5 items-center mt-3">
+          <div className="flex items-center gap-5 mt-3">
             <label htmlFor="publicationDate">Publication Date:</label>
             <select
               id="publicationDate"
@@ -101,37 +102,46 @@ export default function Books() {
           </div>
         )}
       </div>
-      <div className="grid grid-cols-12 max-w-7xl mx-auto relative">
-        <div className="col-span-12 grid grid-flow-row sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {data?.data?.data
-            ?.filter((book: IBook) => {
-              if (genre && !book.genre?.includes(genre)) {
-                return false;
-              }
-              if (publicationDate && book.publicationDate !== publicationDate) {
-                return false;
-              }
-              if (
-                searchInput &&
-                !(
-                  book.title
-                    ?.toLowerCase()
-                    .includes(searchInput.toLowerCase()) ||
-                  book.author
-                    ?.toLowerCase()
-                    .includes(searchInput.toLowerCase()) ||
-                  book.genre?.toLowerCase().includes(searchInput.toLowerCase())
-                )
-              ) {
-                return false;
-              }
-              return true;
-            })
-            .map((book: IBook) => (
-              <BookCard key={book._id} book={book} />
-            ))}
+      {isLoading ? (
+        <Skeletons />
+      ) : (
+        <div className="relative grid grid-cols-12 mx-auto max-w-7xl">
+          <div className="grid grid-flow-row col-span-12 gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {data?.data?.data
+              ?.filter((book: IBook) => {
+                if (genre && !book.genre?.includes(genre)) {
+                  return false;
+                }
+                if (
+                  publicationDate &&
+                  book.publicationDate !== publicationDate
+                ) {
+                  return false;
+                }
+                if (
+                  searchInput &&
+                  !(
+                    book.title
+                      ?.toLowerCase()
+                      .includes(searchInput.toLowerCase()) ||
+                    book.author
+                      ?.toLowerCase()
+                      .includes(searchInput.toLowerCase()) ||
+                    book.genre
+                      ?.toLowerCase()
+                      .includes(searchInput.toLowerCase())
+                  )
+                ) {
+                  return false;
+                }
+                return true;
+              })
+              .map((book: IBook) => (
+                <BookCard key={book._id} book={book} />
+              ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

@@ -3,8 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import BookReview from "../components/BookReview";
 import DeleteConfirmationModal from "../components/DeleteConfirmationModel";
-import Loading from "../components/Loading";
 import { Button } from "../components/ui/button";
+import HeroSkeleton from "../components/ui/skeleton/HeroSkeleton";
 import {
   useDeleteBookMutation,
   useSingleBookQuery,
@@ -94,21 +94,23 @@ export default function BookDetails() {
   };
 
   if (isLoading) {
-    return <Loading />;
+    return <HeroSkeleton />;
   }
 
   return (
-    <div className="container px-5 mx-auto py-10">
-      <div className="flex flex-wrap max-w-xl mx-auto  items-center border-b border-gray-300">
-        <div className=" me-3 my-2">
-          <img
-            className="object-cover w-full object-center rounded"
-            src={book?.image_link}
-            alt=""
-          />
+    <div className="container px-5 py-10 mx-auto">
+      <div className="grid grid-flow-row col-span-12 gap-5 border-b border-gray-300 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+        <div className="flex flex-wrap items-center justify-center max-w-xl mx-auto ">
+          <div className="my-2 me-3">
+            <img
+              className="object-cover object-center w-full rounded h-96"
+              src={book?.image_link}
+              alt={book?.title}
+            />
+          </div>
         </div>
-        <div className="w-full space-y-3 mb-5">
-          <h1 className="text-4xl font-bold">{book?.title}</h1>
+        <div className="flex flex-col items-start w-full py-5 mb-5">
+          <h2 className="text-3xl font-bold">{book?.title}</h2>
           <p className="text-xl">Author: {book?.author}</p>
           <p className="text-xl">Genre: {book?.genre}</p>
           <p className="text-xl">Publication Date: {book?.publicationDate}</p>

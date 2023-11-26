@@ -80,8 +80,8 @@ export default function BookReview({ id }: IProps) {
     return <Loading />;
   }
   return (
-    <div className="max-w-xl mx-auto mt-5">
-      <form className="flex gap-5 items-center" onSubmit={formik.handleSubmit}>
+    <div className="max-w-3xl mx-auto mt-5">
+      <form className="flex items-center gap-5" onSubmit={formik.handleSubmit}>
         <Textarea
           className="min-h-[30px]"
           placeholder="Write a review..."
@@ -104,12 +104,12 @@ export default function BookReview({ id }: IProps) {
           <div key={review._id} className="flex gap-5 mb-4 border-b">
             <div className="w-1/12">
               <img
-                className="rounded-full pb-1"
+                className="pb-1 rounded-full"
                 src="https://user-images.githubusercontent.com/522079/90506845-e8420580-e122-11ea-82ca-31087fc8486c.png"
                 alt=""
               />
             </div>
-            <div className="w-11/12 border-l-2 px-2">
+            <div className="w-11/12 px-2 border-l-2">
               <h5 className="text-lg font-bold">{review.review}</h5>
               <p className="italic text-gray-400">
                 - by {review.reviewerId.firstName} {review.reviewerId.lastName}{" "}

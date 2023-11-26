@@ -1,12 +1,12 @@
 export default function Hero() {
   return (
-    <section className="dark:bg-gray-800 dark:text-gray-100 container">
+    <section className="container">
       <div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-14 lg:flex-row lg:justify-between">
         <div className="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
           <img
             src="https://i.ibb.co/WPyVwqF/hero.jpg"
             alt=""
-            className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128 mt-5"
+            className="object-contain mt-5 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128"
           />
         </div>
         <div className="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
@@ -17,7 +17,7 @@ export default function Hero() {
             </span>{" "}
             of Wondrous Books
           </h1>
-          <p className="mt-3 mb-3 px-1 sm:mb-5 text-sm">
+          <p className="px-1 mt-3 mb-3 text-sm sm:mb-5">
             So many books, so little time. A room without books is like a body
             without a soul.
             <br className="hidden md:inline lg:hidden" /> Choose your favorite
