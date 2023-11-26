@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import BookCard from "../components/BookCard";
 import { Input } from "../components/ui/input";
 import Skeletons from "../components/ui/skeleton/Skeletons";
@@ -13,6 +14,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { IBook } from "../types/globalTypes";
 
 export default function Books() {
+  const navigate = useNavigate();
   const { data, isLoading } = useGetBooksQuery(undefined);
   const [searchInput, setSearchInput] = useState("");
   const dispatch = useAppDispatch();
@@ -54,52 +56,62 @@ export default function Books() {
 
   return (
     <div className="relative mx-auto max-w-7xl">
-      <div className="max-w-md px-10 mx-auto mt-5 mb-5">
+      <div className="max-w-md px-2 mx-auto mt-5">
         <form className="flex items-center gap-5" onSubmit={handleSearchSubmit}>
           <Input
-            className="min-h-[30px]"
             placeholder="Search for books"
             value={searchInput}
             onChange={handleSearchChange}
+            className="min-h-[30px] border border-[#000]"
           />
         </form>
       </div>
-      <div className="max-w-md px-12 mx-auto mt-5 mb-5">
-        <div className="flex items-center gap-5">
-          <label htmlFor="genre">Genre:</label>
-          <select
-            id="genre"
-            name="genre"
-            value={genre}
-            onChange={handleGenreChange}
-          >
-            <option value="">All</option>
-            {genres.map((genre: string, index: number) => (
-              <option key={index} value={genre}>
-                {genre}
-              </option>
-            ))}
-          </select>
-        </div>
+      <div className="max-w-md px-2 mx-auto mt-2 mb-5">
+        <button
+          className={[
+            "px-3 mb-2 me-2 rounded-md text-lg text-[#000] border border-[#000] text-center hover:bg-[#000] hover:text-white ",
+          ].join(" ")}
+          onClick={() => {
+            setSearchInput("");
+            dispatch(setGenre(""));
+            dispatch(setPublicationDate(""));
+            dispatch(setSearch(""));
+            navigate(`/books`);
+          }}
+        >
+          All
+        </button>
+        <select
+          id="genre"
+          name="genre"
+          value={genre}
+          onChange={handleGenreChange}
+          className="px-3 mb-2 me-2 rounded-md text-lg text-[#000] border border-[#000] text-center hover:bg-[#000] hover:text-white "
+        >
+          <option value="">Genre</option>
+          {genres.map((genre: string, index: number) => (
+            <option key={index} value={genre}>
+              {genre}
+            </option>
+          ))}
+        </select>
         {genre && (
-          <div className="flex items-center gap-5 mt-3">
-            <label htmlFor="publicationDate">Publication Date:</label>
-            <select
-              id="publicationDate"
-              name="publicationDate"
-              value={publicationDate}
-              onChange={handlePublicationDateChange}
-            >
-              <option value="">All</option>
-              {data?.data?.data
-                ?.filter((book: IBook) => book.genre === genre)
-                .map((book: IBook, index: number) => (
-                  <option key={index} value={book.publicationDate}>
-                    {book.publicationDate}
-                  </option>
-                ))}
-            </select>
-          </div>
+          <select
+            id="publicationDate"
+            name="publicationDate"
+            value={publicationDate}
+            onChange={handlePublicationDateChange}
+            className="px-3 mb-2 rounded-md text-lg text-[#000] border border-[#000] text-center hover:bg-[#000] hover:text-white "
+          >
+            <option value="">Publish Date</option>
+            {data?.data?.data
+              ?.filter((book: IBook) => book.genre === genre)
+              .map((book: IBook, index: number) => (
+                <option key={index} value={book.publicationDate}>
+                  {book.publicationDate}
+                </option>
+              ))}
+          </select>
         )}
       </div>
       {isLoading ? (

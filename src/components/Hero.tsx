@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Hero() {
   return (
     <section className="container">
@@ -29,14 +31,14 @@ export default function Hero() {
               href="#"
               className="px-8 py-3 text-lg font-semibold rounded dark:bg-cyan-400 dark:text-gray-900 bg-cyan-400 hover:bg-cyan-600 hover:text-gray-100 dark:hover:bg-cyan-600 dark:hover:text-gray-100"
             >
-              Interested
+              <Link to="/books">Browse</Link>
             </a>
             <a
               rel="noopener noreferrer"
               href="#"
               className="px-8 py-3 text-lg font-semibold border rounded dark:border-gray-100 hover:bg-black hover:text-white dark:hover:bg-gray-100 dark:hover:text-gray-900"
             >
-              Explore
+              <Link to="/add-new-book">Add New</Link>
             </a>
           </div>
         </div>
