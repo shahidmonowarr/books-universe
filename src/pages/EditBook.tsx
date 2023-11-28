@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import Loading from "../components/Loading";
+import { fileUploader } from "../helpers/fileUploader";
 import {
   useSingleBookQuery,
   useUpdateBookMutation,
@@ -62,11 +63,29 @@ export default function EditBook() {
 
     validationSchema: formSchema,
 
-    onSubmit: (values, { resetForm }) => {
-      if (id) {
-        updateBook({ id, data: values });
-      } else {
-        resetForm();
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        const formData = new FormData();
+        formData.append("file", values.image_link);
+
+        // call file uploader to upload selected file
+        const imageUrl = await fileUploader(formData);
+
+        if (imageUrl) {
+          values.image_link = imageUrl;
+        } else {
+          toast.error("Image Upload Failed");
+
+          return;
+        }
+
+        if (id) {
+          updateBook({ id, data: values });
+        } else {
+          resetForm();
+        }
+      } catch (error) {
+        console.log(error);
       }
     },
   });
@@ -178,11 +197,17 @@ export default function EditBook() {
             <label htmlFor="image_link">Book Image URL</label>
             <input
               className="w-full p-2 mb-3 mt-1 rounded-lg"
-              type="text"
+              type="file"
               name="image_link"
               id="image_link"
-              onChange={formik.handleChange("image_link")}
-              value={formik.values.image_link}
+              accept="image/png, image/jpeg, image/jpg"
+              onChange={(event) => {
+                const selectedFile =
+                  event.target.files && event.target.files[0];
+                if (selectedFile) {
+                  formik.setFieldValue("image_link", selectedFile);
+                }
+              }}
             />
           </div>
           <button
