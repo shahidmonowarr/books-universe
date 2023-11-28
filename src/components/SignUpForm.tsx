@@ -144,7 +144,7 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
         <div className="flex justify-center gap-[30px] mt-[20px]">
           <button
             type="submit"
-            className="first_button duration-300 rounded-full py-[10px] px-[20px] font-medium "
+            className=" duration-300 border rounded-md hover:bg-black hover:text-white py-[10px] px-[20px] font-medium "
           >
             Create Account
           </button>
