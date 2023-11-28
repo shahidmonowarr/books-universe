@@ -28,7 +28,7 @@ function App() {
   return (
     <div>
       {/* <Toaster /> */}
-      <ToastContainer />
+      <ToastContainer position="top-center" />
       <MainLayout />
     </div>
   );

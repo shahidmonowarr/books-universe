@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
+import { fileUploader } from "../helpers/fileUploader";
 import { useAddBookMutation } from "../redux/features/books/bookApi";
 import { IError } from "../types/globalTypes";
 
@@ -27,9 +28,25 @@ export default function AddNewBook() {
 
     validationSchema: formSchema,
 
-    onSubmit: (values, { resetForm }) => {
-      addBook(values);
-      resetForm();
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        const formData = new FormData();
+        formData.append("file", values.image_link);
+
+        // call file uploader to upload selected file
+        const imageUrl = await fileUploader(formData);
+
+        if (imageUrl) {
+          values.image_link = imageUrl;
+
+          addBook(values);
+          resetForm();
+        } else {
+          toast.error("Image Upload Failed");
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
 
@@ -109,7 +126,7 @@ export default function AddNewBook() {
               <input
                 className="w-full p-2 mb-3 mt-1 rounded-lg"
                 placeholder="Month 00, 0000"
-                type="text"
+                type="date"
                 name="publicationDate"
                 id="publicationDate"
                 onChange={formik.handleChange("publicationDate")}
@@ -128,11 +145,17 @@ export default function AddNewBook() {
             <input
               className="w-full p-2 mb-3 mt-1 rounded-lg"
               placeholder="Write book image URL"
-              type="text"
+              type="file"
               name="image_link"
               id="image_link"
-              onChange={formik.handleChange("image_link")}
-              value={formik.values.image_link}
+              accept="image/png, image/jpeg image/jpg"
+              onChange={(event) => {
+                const selectedFile =
+                  event.target.files && event.target.files[0];
+                if (selectedFile) {
+                  formik.setFieldValue("image_link", selectedFile);
+                }
+              }}
             />
           </div>
           <button

@@ -160,7 +160,7 @@ export default function EditBook() {
               <label htmlFor="publicationDate">Publication Date</label>
               <input
                 className="w-full p-2 mb-3 mt-1 rounded-lg"
-                type="text"
+                type="date"
                 name="publicationDate"
                 id="publicationDate"
                 onChange={formik.handleChange("publicationDate")}
