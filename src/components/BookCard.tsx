@@ -66,9 +66,13 @@ export default function BookCard({ book }: IProps) {
 
   return (
     <div>
-      <div className="rounded-2xl m-5 h-[450px] flex flex-col items-start justify-between p-5 overflow-hidden shadow-md border border-gray-100 hover:shadow-2xl hover:scale-[102%] transition-all gap-1">
+      <div className="rounded-2xl m-5 h-[450px] flex flex-col items-start justify-between p-5 overflow-hidden shadow-md border border-gray-100 hover:shadow-2xl hover:scale-[102%] transition-all">
         <Link to={`/book-details/${book._id}`} className="w-full">
-          <img className="h-52 w-auto" src={book?.image_link} alt="book" />
+          <img
+            className="h-52 mx-auto w-auto"
+            src={book?.image_link}
+            alt="book"
+          />
           <h1 className="text-xl font-semibold">{book?.title}</h1>
         </Link>
         <p className="text-sm">Author: {book?.author}</p>

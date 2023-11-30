@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { IoMdEye, IoMdEyeOff } from "react-icons/io";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { NavHashLink } from "react-router-hash-link";
 import { toast } from "react-toastify";
 import BookReview from "../components/BookReview";
 import DeleteConfirmationModal from "../components/DeleteConfirmationModel";
@@ -18,6 +20,8 @@ export default function BookDetails() {
   const { data, isLoading } = useSingleBookQuery(id);
   const book = data?.data;
   const navigate = useNavigate();
+  const location = useLocation();
+  const [isBookOpen, setIsBookOpen] = useState<boolean>(false);
 
   const [
     updateBook,
@@ -125,6 +129,65 @@ export default function BookDetails() {
             >
               Delete
             </label>
+            <div className="flex gap-2 mt-3">
+              {isBookOpen ? (
+                <Button
+                  className="bg-red-500 hover:bg-red-600"
+                  onClick={() => setIsBookOpen((prev) => !prev)}
+                >
+                  <IoMdEyeOff className="text-lg me-1 " />
+                  Hide Pdf
+                </Button>
+              ) : (
+                <NavHashLink
+                  to={`${location.pathname}/#bookPdfSection`}
+                  onClick={() => setIsBookOpen((prev) => !prev)}
+                >
+                  <Button className="">
+                    <IoMdEye className="text-lg me-1" />
+                    View Pdf
+                  </Button>
+                </NavHashLink>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="bookPdfSection" className="w-full h-full flex justify-center">
+        <div className="w-full">
+          <div>
+            {isBookOpen && (
+              <>
+                {book?.pdf_link ? (
+                  <>
+                    <div className="flex flex-col sm:flex-row justify-center items-center gap-2 my-10 ">
+                      <h2 className="text-xl font-bold text-center">
+                        {book?.title} Book's PDF
+                      </h2>
+                      <Button
+                        className="bg-red-500 hover:bg-red-600"
+                        onClick={() => setIsBookOpen((prev) => !prev)}
+                      >
+                        <IoMdEyeOff className="text-lg me-1" />
+                        Hide Pdf
+                      </Button>
+                    </div>
+                    <div className=" min-w-[100%] lg:w-[700px] h-[90vh] border-[15px]  ">
+                      <iframe
+                        src={book?.pdf_link}
+                        width="100%"
+                        height="100%"
+                        allow="autoplay"
+                      ></iframe>
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-center my-10">
+                    <h2 className="font-bold">[No PDF Available]</h2>
+                  </div>
+                )}
+              </>
+            )}
           </div>
         </div>
       </div>

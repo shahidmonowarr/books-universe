@@ -18,6 +18,7 @@ export default function EditBook() {
         data: {
           title: string;
           image_link: string;
+          pdf_link: string;
           author: string;
           genre: string;
           publicationDate: string;
@@ -50,12 +51,14 @@ export default function EditBook() {
     genre: Yup.string().required("Genre is required"),
     publicationDate: Yup.string().required("Publication date is required"),
     image_link: Yup.string().required("Image link is required"),
+    pdf_link: Yup.string().optional(),
   });
 
   const formik = useFormik({
     initialValues: {
       title: "",
       image_link: "",
+      pdf_link: "",
       author: "",
       genre: "",
       publicationDate: "",
@@ -101,6 +104,7 @@ export default function EditBook() {
         genre,
         publicationDate,
         image_link,
+        pdf_link: "",
       });
     }
 
@@ -192,6 +196,23 @@ export default function EditBook() {
                 </div>
               ) : null}
             </div>
+          </div>
+          <div className="w-full mb-3">
+            <label htmlFor="pdf_link">Pdf Link</label>
+            <input
+              className="w-full p-2 mb-3 mt-1 rounded-lg"
+              placeholder="Write book pdf link"
+              type=" text"
+              name="pdf_link"
+              id="pdf_link"
+              onChange={formik.handleChange("pdf_link")}
+              value={formik.values.pdf_link}
+            />
+            {formik.touched.pdf_link && formik.errors.pdf_link ? (
+              <div className="text-sm text-red-600">
+                {formik.errors.pdf_link}
+              </div>
+            ) : null}
           </div>
           <div className="w-full mb-3">
             <label htmlFor="image_link">Book Image URL</label>

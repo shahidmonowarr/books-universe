@@ -36,9 +36,9 @@ export default function Navbar() {
   return (
     <nav className="fixed z-10 w-full h-16 top backdrop-blur-lg">
       <div className="w-full h-full bg-white/60">
-        <div className="flex items-center justify-between w-full h-full mx-auto md:max-w-7xl ">
+        <div className="flex items-center justify-between w-full h-full mx-auto md:max-w-7xl">
           <div>
-            <img className="h-9" src={logo} alt="log" />
+            <img className="h-9" src={logo} alt="logo" />
           </div>
           <div className="md:hidden">
             {showMenu ? (
@@ -66,11 +66,6 @@ export default function Navbar() {
                   <li>
                     <Button variant="link" asChild>
                       <Link to="/books">All Books</Link>
-                    </Button>
-                  </li>
-                  <li>
-                    <Button variant="link" asChild>
-                      <Link to="/contact">Contact</Link>
                     </Button>
                   </li>
                 </>
@@ -109,12 +104,9 @@ export default function Navbar() {
                       <AvatarFallback>SM</AvatarFallback>
                     </Avatar>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent>
+                  <DropdownMenuContent className="bg-white/95">
                     <DropdownMenuLabel>Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem className="cursor-pointer">
-                      Profile
-                    </DropdownMenuItem>
                     {!token && (
                       <>
                         <Link to="/login">
@@ -145,7 +137,7 @@ export default function Navbar() {
         </div>
       </div>
       {showMenu && (
-        <div className="md:hidden w-full bg-white/60">
+        <div className="md:hidden w-full sm:me-2 bg-white/95">
           <ul className="flex flex-col items-center justify-center space-y-4">
             {!token && (
               <>
@@ -161,7 +153,7 @@ export default function Navbar() {
                 </li>
                 <li>
                   <Button variant="link" asChild>
-                    <Link to="/contact">Contact</Link>
+                    <Link to="/add-new-book">Add New</Link>
                   </Button>
                 </li>
               </>
@@ -199,12 +191,9 @@ export default function Navbar() {
                     <AvatarFallback>SM</AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent>
+                <DropdownMenuContent className="bg-white/95">
                   <DropdownMenuLabel>Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem className="cursor-pointer">
-                    Profile
-                  </DropdownMenuItem>
                   {!token && (
                     <>
                       <Link to="/login">

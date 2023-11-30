@@ -4,15 +4,15 @@ export default function Hero() {
   return (
     <section className="container">
       <div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-14 lg:flex-row lg:justify-between">
-        <div className="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
+        <div className="flex items-center justify-center sm:p-3 mt-8 lg:mt-0 h-72 sm:h-100 lg:h-96 xl:h-112 2xl:h-128">
           <img
             src="https://i.ibb.co/WPyVwqF/hero.jpg"
             alt=""
             className="object-contain mt-5 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128"
           />
         </div>
-        <div className="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
-          <h1 className="text-5xl font-bold sm:text-6xl">
+        <div className="flex flex-col justify-center text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
+          <h1 className="sm:text-5xl md:text-5xl lg:text-6xl   font-bold">
             Book Universe <br />
             <span className="dark:text-cyan-400 text-cyan-500">
               A Collections
