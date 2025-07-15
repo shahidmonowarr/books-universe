@@ -65,32 +65,56 @@ export default function BookCard({ book }: IProps) {
   ]);
 
   return (
-    <div>
-      <div className="rounded-2xl m-5 h-[450px] flex flex-col items-start justify-between p-5 overflow-hidden shadow-md border border-gray-100 hover:shadow-2xl hover:scale-[102%] transition-all">
-        <Link to={`/book-details/${book._id}`} className="w-full">
-          <img
-            className="h-52 mx-auto w-auto"
-            src={book?.image_link}
-            alt="book"
-          />
-          <h1 className="text-xl font-semibold">{book?.title}</h1>
+    <div className="group h-full">
+      <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full flex flex-col overflow-hidden">
+        <Link to={`/book-details/${book._id}`} className="flex-1 flex flex-col">
+          {/* Image Container */}
+          <div className="relative p-6 pb-4 bg-gray-50 flex items-center justify-center min-h-[240px]">
+            <img
+              className="h-48 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              src={book?.image_link}
+              alt={book?.title}
+            />
+          </div>
+
+          {/* Content Container */}
+          <div className="flex-1 p-6 pt-4 flex flex-col">
+            <h1 className="text-lg font-semibold text-gray-900 mb-3 line-clamp-2 leading-tight">
+              {book?.title}
+            </h1>
+
+            <div className="flex-1 space-y-2 mb-4">
+              <p className="text-sm text-gray-600">
+                <span className="font-medium">Author:</span> {book?.author}
+              </p>
+              <p className="text-sm text-gray-600">
+                <span className="font-medium">Genre:</span> {book?.genre}
+              </p>
+              <p className="text-sm text-gray-600">
+                <span className="font-medium">Published:</span>{" "}
+                {book?.publicationDate}
+              </p>
+            </div>
+          </div>
         </Link>
-        <p className="text-sm">Author: {book?.author}</p>
-        <p className="text-sm">Genre: {book?.genre}</p>
-        <p className="text-sm">Publication Date: {book?.publicationDate}</p>
-        <div>
+
+        {/* Action Buttons */}
+        <div className="p-6 pt-0 flex flex-col gap-2">
           <Button
-            variant="default"
-            className="mb-1 me-1"
+            variant="outline"
+            size="sm"
+            className="w-full border-blue-200 text-blue-700 hover:bg-blue-50 hover:border-blue-300 transition-colors"
             onClick={() => addWishList({ data: { bookId: book._id } })}
           >
-            Wish list +
+            Add to Wishlist
           </Button>
           <Button
             variant="default"
+            size="sm"
+            className="w-full bg-gray-900 hover:bg-gray-800 text-white transition-colors"
             onClick={() => addReadingList({ data: { bookId: book._id } })}
           >
-            Reading list +
+            Add to Reading List
           </Button>
         </div>
       </div>

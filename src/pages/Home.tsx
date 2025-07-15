@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <div>
       <Hero />
-      <div className="relative mx-auto max-w-7xl">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2 className="mt-10 mb-5 text-2xl font-semibold text-center">
           Top 10 Recently Added Books:
         </h2>
