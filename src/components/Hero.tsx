@@ -111,7 +111,7 @@ export default function Hero() {
               
               {/* Image */}
               <div className="relative bg-white dark:bg-gray-800 rounded-full p-8 shadow-2xl">
-                <div className="w-full h-96 sm:h-[500px] lg:h-[600px] rounded-full overflow-hidden">
+                <div className="w-full h-96 sm:h-[4500px] lg:h-[500px] rounded-full overflow-hidden">
                   <img
                     src="https://i.ibb.co/WPyVwqF/hero.jpg"
                     alt="Book Collection"

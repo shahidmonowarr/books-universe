@@ -72,38 +72,9 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>
-      {/* <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid gap-2">
-          <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="email">
-              Email
-            </Label>
-            <Input
-              id="email"
-              placeholder="name@example.com"
-              type="email"
-              autoCapitalize="none"
-              autoComplete="email"
-              autoCorrect="off"
-              {...register("email", { required: "Email is required" })}
-            />
-            {errors.email && <p>{errors.email.message}</p>}
-            <Input
-              id="password"
-              placeholder="your password"
-              type="password"
-              autoCapitalize="none"
-              autoComplete="password"
-              {...register("password", { required: "Password is required" })}
-            />
-            {errors.password && <p>{errors.password.message}</p>}
-          </div>
-          <Button>Login with email</Button>
-        </div>
-      </form> */}
       <form onSubmit={formik.handleSubmit}>
         <input
-          className="w-full p-2 mb-3"
+          className="w-full p-2 mb-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
           type="email"
           placeholder="Email"
           name="email"
@@ -118,7 +89,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
         ) : null}
 
         <input
-          className="w-full p-2 mb-3"
+          className="w-full p-2 mb-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
           type="password"
           placeholder="Password"
           name="password"

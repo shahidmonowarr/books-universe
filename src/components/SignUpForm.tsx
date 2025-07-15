@@ -69,7 +69,7 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
     <div className={cn("grid gap-6", className)} {...props}>
       <form onSubmit={formik.handleSubmit}>
         <input
-          className="w-full p-2 mb-3"
+          className="w-full p-2 mb-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
           type="text"
           name="firstName"
           id="firstName"
@@ -83,7 +83,7 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
           </div>
         ) : null}
         <input
-          className="w-full p-2 mb-3"
+          className="w-full p-2 mb-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
           type="text"
           name="lastName"
           id="lastName"
@@ -97,7 +97,7 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
           </div>
         ) : null}
         <input
-          className="w-full p-2 mb-3"
+          className="w-full p-2 mb-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
           type="email"
           placeholder="Email"
           name="email"
@@ -111,7 +111,7 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
           </div>
         ) : null}
         <input
-          className="w-full p-2 mb-3"
+          className="w-full p-2 mb-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
           type="password"
           placeholder="Password"
           name="password"
@@ -125,7 +125,7 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
           </div>
         ) : null}
         <input
-          className="w-full p-2 mb-3"
+          className="w-full p-2 mb-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500"
           type="password"
           placeholder="Confirm Password"
           name="confirmPassword"
