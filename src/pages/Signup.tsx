@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import logo from "../assets/images/books-logo-white-bg.png";
 import { SignupForm } from "../components/SignUpForm";
 import { buttonVariants } from "../components/ui/button";
-import Footer from "../layout/Footer";
 import { cn } from "../lib/utils";
 import {
   FiUserPlus,
