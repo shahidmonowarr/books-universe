@@ -1,53 +1,153 @@
-export default function NewsLetter() {
-  return (
-    <div className="mt-24 mx-auto md:px-6">
-      <section className="mb-10">
-        <div className="relative overflow-hidden bg-cover bg-no-repeat bg-[50%] bg-[url('https://mdbcdn.b-cdn.net/img/new/textures/full/66.jpg')] h-[300px]"></div>
-        <div className="container px-6 md:px-12">
-          <div className="block rounded-lg bg-[hsla(0,0%,100%,0.7)] px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-[hsla(0,0%,5%,0.7)] dark:shadow-black/20 md:py-16 md:px-12 mt-[-100px] backdrop-blur-[30px]">
-            <div className="flex flex-wrap justify-center text-center lg:text-left">
-              <div className="w-full shrink-0 grow-0 basis-auto md:px-6 xl:w-10/12">
-                <div className="grid items-center gap-x-6 lg:grid-cols-2">
-                  <div className="mb-10 lg:mb-0">
-                    <h2 className="text-3xl font-bold">
-                      Do not miss any updates.
-                      <br />
-                      <span className="text-primary dark:text-primary-400">
-                        Subscribe to the newsletter
-                      </span>
-                    </h2>
-                  </div>
+import { useState } from "react";
 
-                  <div className="mb-6 flex-row md:mb-0 md:flex">
-                    <div
-                      className="relative mb-3 w-full md:mr-3 md:mb-0"
-                      data-te-input-wrapper-init
-                    >
-                      <input
-                        type="text"
-                        className="peer block min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[2.15] outline-none transition-all border-2 border-black duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                        id="exampleFormControlInput2"
-                        placeholder="Enter your email"
-                      />
-                      <label className="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[1.8rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[1.15rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary">
-                        Enter your email
-                      </label>
-                    </div>
-                    <button
-                      type="submit"
-                      className="inline-block rounded bg-primary px-7 pt-3 pb-2.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-                      data-te-ripple-init
-                      data-te-ripple-color="light"
-                    >
-                      Subscribe
-                    </button>
+function NewsLetter() {
+  const [email, setEmail] = useState("");
+  const [isSubscribed, setIsSubscribed] = useState(false);
+
+  const handleSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    setIsSubscribed(true);
+    setTimeout(() => setIsSubscribed(false), 3000);
+    setEmail("");
+  };
+
+  return (
+    <section className="relative py-20 bg-white dark:bg-gray-900 overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-0 w-72 h-72 bg-cyan-400/5 rounded-full animate-pulse"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full animate-pulse delay-1000"></div>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-3xl shadow-2xl overflow-hidden">
+          <div className="relative p-8 sm:p-12 lg:p-16">
+            {/* Decorative Elements */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-400/10 rounded-full -mr-16 -mt-16"></div>
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-500/10 rounded-full -ml-12 -mb-12"></div>
+
+            <div className="relative grid lg:grid-cols-2 gap-8 items-center">
+              {/* Content */}
+              <div className="space-y-6">
+                <div className="inline-flex items-center gap-2 bg-cyan-100 dark:bg-cyan-900/30 rounded-full px-4 py-2">
+                  <span className="text-cyan-600 dark:text-cyan-400 text-xl">
+                    📧
+                  </span>
+                  <span className="text-sm font-medium text-cyan-700 dark:text-cyan-300">
+                    Stay Updated
+                  </span>
+                </div>
+
+                <div className="space-y-4">
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
+                    Never Miss a
+                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600">
+                      Great Story
+                    </span>
+                  </h2>
+                  <p className="text-lg text-gray-600 dark:text-gray-300">
+                    Get notified about new book releases, exclusive content, and
+                    special offers. Join our community of book lovers today.
+                  </p>
+                </div>
+
+                {/* Features */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      Weekly updates
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      No spam ever
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      Exclusive content
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-cyan-500 rounded-full"></div>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      Unsubscribe anytime
+                    </span>
                   </div>
                 </div>
+              </div>
+
+              {/* Form */}
+              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 sm:p-8 shadow-lg border border-gray-100 dark:border-gray-700">
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="relative">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter your email address"
+                      className="w-full px-4 py-4 text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-200"
+                      required
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubscribed}
+                    className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubscribed ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                        Subscribed!
+                      </span>
+                    ) : (
+                      <span className="flex items-center justify-center gap-2">
+                        Subscribe to Newsletter
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                          />
+                        </svg>
+                      </span>
+                    )}
+                  </button>
+                </form>
+
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-4 text-center">
+                  By subscribing, you agree to our Terms of Service and Privacy
+                  Policy
+                </p>
               </div>
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }
+
+export default NewsLetter;
