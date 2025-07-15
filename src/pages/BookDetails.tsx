@@ -6,13 +6,13 @@ import { toast } from "react-toastify";
 import BookReview from "../components/BookReview";
 import DeleteConfirmationModal from "../components/DeleteConfirmationModel";
 import { Button } from "../components/ui/button";
-import HeroSkeleton from "../components/ui/skeleton/HeroSkeleton";
 import {
   useDeleteBookMutation,
   useSingleBookQuery,
   useUpdateBookMutation,
 } from "../redux/features/books/bookApi";
 import { IError } from "../types/globalTypes";
+import DetailsSkeleton from "../components/ui/skeleton/DetailsSkeleton";
 
 export default function BookDetails() {
   const { id } = useParams();
@@ -98,105 +98,169 @@ export default function BookDetails() {
   };
 
   if (isLoading) {
-    return <HeroSkeleton />;
+    return <DetailsSkeleton />;
   }
 
   return (
-    <div className="container px-5 py-10 mx-auto">
-      <div className="grid grid-flow-row col-span-12 gap-5 border-b border-gray-300 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
-        <div className="flex flex-wrap items-center justify-center max-w-xl mx-auto ">
-          <div className="my-2 me-3">
-            <img
-              className="object-cover object-center w-full rounded h-96"
-              src={book?.image_link}
-              alt={book?.title}
-            />
-          </div>
-        </div>
-        <div className="flex flex-col items-start w-full py-5 mb-5">
-          <h2 className="text-3xl font-bold">{book?.title}</h2>
-          <p className="text-xl">Author: {book?.author}</p>
-          <p className="text-xl">Genre: {book?.genre}</p>
-          <p className="text-xl">Publication Date: {book?.publicationDate}</p>
-          <div>
-            <Button className="me-2" onClick={() => handleUpdate(id)}>
-              Edit
-            </Button>
-            <label
-              htmlFor="deleteModal"
-              className="duration-300 h-10 py-2.5 px-4 rounded-md text-sm font-medium cursor-pointer text-white bg-red-500 hover:bg-red-600"
-              onClick={handleDeleteConfirmation}
-            >
-              Delete
-            </label>
-            <div className="flex gap-2 mt-3">
-              {isBookOpen ? (
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Main Content */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
+            {/* Book Image */}
+            <div className="flex justify-center lg:justify-start">
+              <div className="relative group">
+                <img
+                  className="w-full max-w-md h-auto rounded-xl shadow-lg object-cover transition-transform duration-300 group-hover:scale-105"
+                  src={book?.image_link}
+                  alt={book?.title}
+                />
+                <div className="absolute inset-0 bg-black/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+            </div>
+
+            {/* Book Info */}
+            <div className="flex flex-col justify-center space-y-6">
+              <div className="space-y-4">
+                <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
+                  {book?.title}
+                </h1>
+
+                <div className="space-y-3">
+                  <div className="flex items-center">
+                    <span className="text-sm font-medium text-gray-500 w-24">
+                      Author:
+                    </span>
+                    <span className="text-lg text-gray-900">
+                      {book?.author}
+                    </span>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="text-sm font-medium text-gray-500 w-24">
+                      Genre:
+                    </span>
+                    <span className="inline-block bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">
+                      {book?.genre}
+                    </span>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="text-sm font-medium text-gray-500 w-24">
+                      Published:
+                    </span>
+                    <span className="text-lg text-gray-900">
+                      {book?.publicationDate}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap gap-3">
                 <Button
-                  className="bg-red-500 hover:bg-red-600"
-                  onClick={() => setIsBookOpen((prev) => !prev)}
+                  onClick={() => handleUpdate(id)}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
                 >
-                  <IoMdEyeOff className="text-lg me-1 " />
-                  Hide Pdf
+                  Edit Book
                 </Button>
-              ) : (
-                <NavHashLink
-                  to={`${location.pathname}/#bookPdfSection`}
-                  onClick={() => setIsBookOpen((prev) => !prev)}
+                <Button
+                  onClick={handleDeleteConfirmation}
+                  variant="destructive"
+                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
                 >
-                  <Button className="">
-                    <IoMdEye className="text-lg me-1" />
-                    View Pdf
+                  Delete Book
+                </Button>
+              </div>
+
+              {/* PDF Viewer Toggle */}
+              <div className="pt-4 border-t border-gray-200">
+                {isBookOpen ? (
+                  <Button
+                    onClick={() => setIsBookOpen((prev) => !prev)}
+                    variant="outline"
+                    className="flex items-center gap-2 border-red-200 text-red-700 hover:bg-red-50 hover:border-red-300"
+                  >
+                    <IoMdEyeOff className="w-5 h-5" />
+                    Hide PDF
                   </Button>
-                </NavHashLink>
-              )}
+                ) : (
+                  <NavHashLink
+                    to={`${location.pathname}/#bookPdfSection`}
+                    onClick={() => setIsBookOpen((prev) => !prev)}
+                  >
+                    <Button className="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-white">
+                      <IoMdEye className="w-5 h-5" />
+                      View PDF
+                    </Button>
+                  </NavHashLink>
+                )}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div id="bookPdfSection" className="w-full h-full flex justify-center">
-        <div className="w-full">
-          <div>
-            {isBookOpen && (
-              <>
-                {book?.pdf_link ? (
-                  <>
-                    <div className="flex flex-col sm:flex-row justify-center items-center gap-2 my-10 ">
-                      <h2 className="text-xl font-bold text-center">
-                        {book?.title} Book's PDF
-                      </h2>
-                      <Button
-                        className="bg-red-500 hover:bg-red-600"
-                        onClick={() => setIsBookOpen((prev) => !prev)}
-                      >
-                        <IoMdEyeOff className="text-lg me-1" />
-                        Hide Pdf
-                      </Button>
-                    </div>
-                    <div className=" min-w-[100%] lg:w-[700px] h-[90vh] border-[15px]  ">
+
+        {/* PDF Viewer Section */}
+        <div id="bookPdfSection" className="mt-8">
+          {isBookOpen && (
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+              {book?.pdf_link ? (
+                <>
+                  <div className="flex flex-col sm:flex-row justify-between items-center gap-4 p-6 bg-gray-50 border-b border-gray-200">
+                    <h2 className="text-xl font-semibold text-gray-900">
+                      {book?.title} - PDF Reader
+                    </h2>
+                    <Button
+                      onClick={() => setIsBookOpen((prev) => !prev)}
+                      variant="outline"
+                      className="flex items-center gap-2 border-red-200 text-red-700 hover:bg-red-50 hover:border-red-300"
+                    >
+                      <IoMdEyeOff className="w-4 h-4" />
+                      Hide PDF
+                    </Button>
+                  </div>
+                  <div className="p-6">
+                    <div className="w-full h-[80vh] border border-gray-300 rounded-lg overflow-hidden">
                       <iframe
                         src={book?.pdf_link}
                         width="100%"
                         height="100%"
+                        className="border-none"
                         allow="autoplay"
-                      ></iframe>
+                      />
                     </div>
-                  </>
-                ) : (
-                  <div className="text-center my-10">
-                    <h2 className="font-bold">[No PDF Available]</h2>
                   </div>
-                )}
-              </>
-            )}
-          </div>
+                </>
+              ) : (
+                <div className="p-12 text-center">
+                  <div className="max-w-sm mx-auto">
+                    <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <IoMdEyeOff className="w-8 h-8 text-gray-400" />
+                    </div>
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">
+                      No PDF Available
+                    </h3>
+                    <p className="text-gray-500">
+                      This book doesn't have a PDF version available for
+                      viewing.
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
+
+        {/* Book Review Section */}
+        <div className="mt-8">
+          <BookReview id={id!} />
+        </div>
+
+        {/* Delete Confirmation Modal */}
+        <DeleteConfirmationModal
+          show={showDeleteModal}
+          onClose={handleDeleteCancel}
+          onConfirm={handleDeleteConfirm}
+        />
       </div>
-      <BookReview id={id!} />
-      <DeleteConfirmationModal
-        show={showDeleteModal}
-        onClose={handleDeleteCancel}
-        onConfirm={handleDeleteConfirm}
-      />
     </div>
   );
 }

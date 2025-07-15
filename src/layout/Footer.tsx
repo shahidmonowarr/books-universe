@@ -2,16 +2,8 @@ export default function Footer() {
   const date = new Date();
   const year = date.getFullYear();
 
-  const socialLinks = [
-    { name: "Twitter", icon: "🐦", href: "#", color: "bg-blue-500" },
-    { name: "Facebook", icon: "📘", href: "#", color: "bg-blue-600" },
-    { name: "Instagram", icon: "📷", href: "#", color: "bg-pink-500" },
-    { name: "GitHub", icon: "🐙", href: "#", color: "bg-gray-800" },
-  ];
-
   const usefulLinks = [
     { name: "About Us", href: "#" },
-    { name: "Blog", href: "#" },
     { name: "GitHub", href: "https://github.com/shahidmonowarr" },
     { name: "Free Books", href: "#" },
   ];
@@ -20,7 +12,6 @@ export default function Footer() {
     { name: "License", href: "#" },
     { name: "Terms & Conditions", href: "#" },
     { name: "Privacy Policy", href: "#" },
-    { name: "Contact Us", href: "#" },
   ];
 
   return (
@@ -44,22 +35,6 @@ export default function Footer() {
                   Connecting readers with amazing stories from around the world.
                   Join our community and discover your next favorite book.
                 </p>
-              </div>
-
-              {/* Social Links */}
-              <div className="space-y-4">
-                <h4 className="text-lg font-semibold text-white">Follow Us</h4>
-                <div className="flex gap-4">
-                  {socialLinks.map((social, index) => (
-                    <a
-                      key={index}
-                      href={social.href}
-                      className={`w-12 h-12 ${social.color} rounded-xl flex items-center justify-center text-white hover:scale-110 transition-transform duration-200 shadow-lg hover:shadow-xl`}
-                    >
-                      <span className="text-xl">{social.icon}</span>
-                    </a>
-                  ))}
-                </div>
               </div>
 
               {/* Newsletter Signup */}
